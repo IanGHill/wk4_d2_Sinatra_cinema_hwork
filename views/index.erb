@@ -1,0 +1,10 @@
+<h1>Film listings:</h1>
+
+<ul>
+  <% for film in @film_list %>
+  <li id="film_list"> <a href="http://localhost:4567/films/<%= @film_list.index(film) %>"><%= film.title %></a></li>
+  <% end %>
+</ul>
+
+
+<img id="giphy" src="https://media.giphy.com/media/SsCeLlSLAgb7DLVQpg/giphy.gif" alt="Movie Camera">

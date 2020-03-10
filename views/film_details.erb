@@ -1,0 +1,15 @@
+<h1 id="film_heading"><%= @film_list[@film_iterator].title %></h1>
+
+<img src="/images/<%= @film_list[@film_iterator].image %>" alt="<%= @film_list[@film_iterator].title %>">
+
+<h2>Screening times</h2>
+
+<ul>
+  <% @screening_list = @film_list[@film_iterator].get_screenings %>
+  
+  <% for screening in @screening_list %>
+  <li> <%= screening['show_time'] %></li>
+  <% end %>
+</ul>
+
+<a href="http://localhost:4567/films">back to full listings</a>

@@ -24,20 +24,14 @@ customer4.save
 customer5 = Customer.new({'name' => 'Maggie Simpson', 'funds' => 20})
 customer5.save
 
-film1 = Film.new({'title' => 'Gone With the Wind', 'price' => 10})
+film1 = Film.new({'title' => 'Gone With the Wind', 'price' => 10, 'image' => 'gonewiththewind.jpg'})
 film1.save
 
-film2 = Film.new({'title' => 'Mockingjay', 'price' => 10})
+film2 = Film.new({'title' => 'Mockingjay: Part 2', 'price' => 10, 'image' => 'mockingjay.jpg'})
 film2.save
 
-film3 = Film.new({'title' => 'Lord of the Rings', 'price' => 8})
+film3 = Film.new({'title' => 'The Fellowship of the Ring', 'price' => 8, 'image' => 'fellowshipofthering.jpg'})
 film3.save
-
-film3.title = 'Fellowship of the Ring'
-film3.update
-
-film2.price = 6
-film2.update
 
 customer1.name = 'Homer Simpson'
 customer1.update
@@ -62,7 +56,8 @@ screening5.save
 screening6 = Screening.new({'film_id' => film3.id, 'show_time' => '22:00', 'tickets_available' => 5, 'tickets_sold' => 0})
 screening6.save
 
-
+screening7 = Screening.new({'film_id' => film1.id, 'show_time' => '23:00', 'tickets_available' => 20, 'tickets_sold' => 0})
+screening7.save
 
 
 ticket1 = Ticket.new({'film_id' => film1.id, 'screening_id' => screening1.id, 'customer_id' => customer1.id})
@@ -92,6 +87,9 @@ ticket8.save
 ticket9 = Ticket.new({'film_id' => film3.id, 'screening_id' => screening6.id, 'customer_id' => customer5.id})
 ticket9.save
 
+ticket10 = Ticket.new({'film_id' => film1.id, 'screening_id' => screening7.id, 'customer_id' => customer5.id})
+ticket10.save
+
 puts "Before purchase #{customer1.name} has £#{customer1.funds}, there are #{screening1.tickets_available} tickets for #{film1.title} available at a price of £#{film1.price} each"
 
 customer1.buy_ticket(film1, screening1)
@@ -102,6 +100,7 @@ customer2.buy_ticket(film1, screening1)
 customer3.buy_ticket(film1, screening2)
 customer4.buy_ticket(film1, screening2)
 customer5.buy_ticket(film1, screening2)
+customer5.buy_ticket(film1, screening3)
 
 
 # screening1.show_time = '19:00'

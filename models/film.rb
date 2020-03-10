@@ -3,22 +3,24 @@ require_relative("../db/sql_runner")
 class Film
 
   attr_reader :id
-  attr_accessor :title, :price
+  attr_accessor :title, :price, :image
 
  def initialize(options)
    @id = options['id'].to_i if options['id']
    @title = options['title']
    @price = options['price'].to_i
+   @image = options['image']
  end
 
  def save()
    sql = "INSERT INTO films
             (title,
-            price)
+            price,
+          image)
             VALUES
-            ($1, $2)
+            ($1, $2, $3)
             RETURNING id"
-    values = [@title, @price]
+    values = [@title, @price, @image]
     film = SqlRunner.run(sql, values).first
     @id = film['id'].to_i
  end
@@ -41,15 +43,39 @@ class Film
    return SqlRunner.run(sql, values).first['count'].to_i
  end
 
- def most_popular_screening
+ def get_screenings
+   sql = "SELECT * FROM screenings
+          WHERE film_id = $1
+          ORDER BY show_time ASC"
+   values = [@id]
+   return SqlRunner.run(sql, values)
+ end
+
+ def most_popular_screening_using_sql
    sql = "SELECT * FROM screenings
           WHERE film_id = $1
           ORDER BY tickets_sold DESC"
    values = [@id]
-   screening = SqlRunner.run(sql, values).first
+   screenings = SqlRunner.run(sql, values).first
 
-   if screening['tickets_sold'].to_i > 0
-     return screening['show_time']
+   if screenings['tickets_sold'].to_i > 0
+     return screenings['show_time']
+   else
+     return "No tickets sold for this film"
+   end
+ end
+
+ def most_popular_screening_using_sort
+   sql = "SELECT * FROM screenings
+          WHERE film_id = $1"
+   values = [@id]
+   screenings = SqlRunner.run(sql, values)
+
+   sorted_screenings_asc = screenings.sort_by {|item| item['tickets_sold'].to_i}
+   sorted_screenings_desc = sorted_screenings_asc.reverse
+
+   if sorted_screenings_desc[0]['tickets_sold'].to_i > 0
+     return sorted_screenings_desc[0]['show_time']
    else
      return "No tickets sold for this film"
    end
@@ -70,11 +96,12 @@ class Film
  def update()
    sql = "UPDATE films SET(
    title,
-   price
+   price,
+   image
    ) =
-   ($1, $2)
-   WHERE id = $3"
-   values = [@title, @price, @id]
+   ($1, $2, $3)
+   WHERE id = $4"
+   values = [@title, @price, @image, @id]
    SqlRunner.run(sql, values)
  end
 
