@@ -1,4 +1,6 @@
-<h1 id="film_heading">Film listings:</h1>
+<h1 id="film_heading">ROXY RETRO CINEMA</h1>
+<h1>Films showing today</h1>
+<h2><%= Time.now.strftime("%A %d %B %Y") %></h2>
 
 <ul>
   <% for film in @film_list %>

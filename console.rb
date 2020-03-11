@@ -33,6 +33,12 @@ film2.save
 film3 = Film.new({'title' => 'The Fellowship of the Ring', 'price' => 8, 'image' => 'fellowshipofthering.jpg'})
 film3.save
 
+film4 = Film.new({'title' => 'First Blood', 'price' => 5, 'image' => 'rambo.jpg'})
+film4.save
+
+film5 = Film.new({'title' => 'Blade Runner', 'price' => 6, 'image' => 'bladerunner.jpg'})
+film5.save
+
 customer1.name = 'Homer Simpson'
 customer1.update
 customer2.funds = 66
@@ -58,6 +64,12 @@ screening6.save
 
 screening7 = Screening.new({'film_id' => film1.id, 'show_time' => '23:00', 'tickets_available' => 20, 'tickets_sold' => 0})
 screening7.save
+
+screening8 = Screening.new({'film_id' => film4.id, 'show_time' => '18:00', 'tickets_available' => 20, 'tickets_sold' => 0})
+screening8.save
+
+screening9 = Screening.new({'film_id' => film5.id, 'show_time' => '16:00', 'tickets_available' => 20, 'tickets_sold' => 0})
+screening9.save
 
 
 ticket1 = Ticket.new({'film_id' => film1.id, 'screening_id' => screening1.id, 'customer_id' => customer1.id})

@@ -2,11 +2,12 @@
 
 <img src="/images/<%= @film_list[@film_iterator].image %>" alt="<%= @film_list[@film_iterator].title %>">
 
-<h2>Screening times</h2>
+<h2>SCREENING TIMES</h2>
 
 <ul>
   <% @screening_list = @film_list[@film_iterator].get_screenings %>
-
+  <li>(All screenings - £<%= @film_list[@film_iterator].price %>)</li>
+  <li>    <br/>  </li>
   <% for screening in @screening_list %>
   <li> <%= screening['show_time'] %></li>
   <% end %>
