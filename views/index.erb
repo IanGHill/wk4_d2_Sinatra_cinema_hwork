@@ -1,10 +1,12 @@
 <h1 id="film_heading">ROXY RETRO CINEMA</h1>
+
 <h1>Films showing today</h1>
+
 <h2><%= Time.now.strftime("%A %d %B %Y") %></h2>
 
 <ul>
   <% for film in @film_list %>
-  <li id="film_list"> <a href="http://localhost:4567/films/<%= @film_list.index(film) %>"><%= film.title %></a></li>
+  <li id="film_list"> <a href="http://localhost:4567/films/<%= film.id %>"><%= film.title %></a></li>
   <% end %>
 </ul>
 

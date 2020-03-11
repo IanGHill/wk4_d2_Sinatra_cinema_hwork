@@ -51,6 +51,15 @@ class Film
    return SqlRunner.run(sql, values)
  end
 
+ def self.find(id)
+   sql = "SELECT * FROM films
+          WHERE id = $1"
+   values = [id]
+   film = SqlRunner.run(sql, values)
+   result = Film.new(film.first)
+   return result
+ end
+
  def most_popular_screening_using_sql
    sql = "SELECT * FROM screenings
           WHERE film_id = $1

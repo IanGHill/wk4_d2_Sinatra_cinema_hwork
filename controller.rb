@@ -14,8 +14,7 @@ get '/films' do
   erb(:index)
 end
 
-get '/films/:num' do
-  @film_list = Film.all()
-  @film_iterator = params[:num].to_i
+get '/films/:id' do
+  @film = Film.find(params[:id])
   erb(:film_details)
 end

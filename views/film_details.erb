@@ -1,12 +1,12 @@
-<h1><%= @film_list[@film_iterator].title %></h1>
+<h1><%= @film.title %></h1>
 
-<img src="/images/<%= @film_list[@film_iterator].image %>" alt="<%= @film_list[@film_iterator].title %>">
+<img src="/images/<%= @film.image %>" alt="<%= @film.title %>">
 
 <h2>SCREENING TIMES</h2>
 
 <ul>
-  <% @screening_list = @film_list[@film_iterator].get_screenings %>
-  <li>(All screenings - £<%= @film_list[@film_iterator].price %>)</li>
+  <% @screening_list = @film.get_screenings %>
+  <li>(All screenings - £<%= @film.price %>)</li>
   <li>    <br/>  </li>
   <% for screening in @screening_list %>
   <li> <%= screening['show_time'] %></li>
